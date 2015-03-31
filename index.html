@@ -9,6 +9,10 @@
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
   <link rel="import" href="elements.html">
   <link rel="stylesheet" href="app.css">
+  
+  <link rel="import" href="home.html">
+  <link rel="import" href="users.html">
+  <link rel="import" href="contact.html">
 </head>
 
 <body>
@@ -19,9 +23,11 @@
         
         <more-route-selector>
           <core-menu>
-            <core-item label="Home" route="home">
-              <a href="{{urlFor('home')}}"></a>
-            </core-item>
+            <core-submenu label="FOOBAR" route="home" href="{{urlFor('home')}}">
+              <core-item label="Test">
+                <a href="home.html#test"></a>
+              </core-item>
+            </core-submenu>
             <core-item label="Users" route="users">
               <a href="{{urlFor('users')}}"></a>
             </core-item>
@@ -37,32 +43,39 @@
           <paper-icon-button icon="menu" core-drawer-toggle></paper-icon-button>
           <div flex>My App</div>
         </core-toolbar>
+        
         <main>          
           
           <more-route-selector selectedParams="{{params}}">
             <core-pages>
-              <section route="home">
-                <h1>Home</h1>
-                <div>This is the home section</div>
-              </section>
+              <my-home route="home"></my-home>
+              <my-users route="users"></my-users>
+              <my-contact route="contact"></my-contact>
+              <!--<section route="home">-->
+              <!--  <h1>Home</h1>-->
+              <!--  <div>This is the home section</div>-->
+              <!--  <section id="test">-->
+              <!--    <div>This is the TEST section</div>-->
+              <!--  </section>-->
+              <!--</section>-->
 
-              <section route="users">
-                <h1>Users</h1>
-                <div>This is the users section</div>
-                <a href="{{urlFor('user-info', {name: 'Rob'})}}">
-                  Rob
-                </a>
-              </section>
+              <!--<section route="users">-->
+              <!--  <h1>Users</h1>-->
+              <!--  <div>This is the users section</div>-->
+              <!--  <a href="{{urlFor('user-info', {name: 'Rob'})}}">-->
+              <!--    Rob-->
+              <!--  </a>-->
+              <!--</section>-->
 
-              <section route="user-info">
-                <h1>User: {{params.name}}</h1>
-                <div>This is {{params.name}}'s section</div>
-              </section>
+              <!--<section route="user-info">-->
+              <!--  <h1>User: {{params.name}}</h1>-->
+              <!--  <div>This is {{params.name}}'s section</div>-->
+              <!--</section>-->
 
-              <section route="contact">
-                <h1>Contact</h1>
-                <div>Gimme a shout!</div>
-              </section>
+              <!--<section route="contact">-->
+              <!--  <h1>Contact</h1>-->
+              <!--  <div>Gimme a shout!</div>-->
+              <!--</section>-->
             </core-pages>
           </more-route-selector>
 

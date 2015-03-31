@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>Polymer SPA</title>
+
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
+    <link rel="import" href="bower_components/core-menu/core-menu.html">
+    <link rel="import" href="bower_components/core-menu/core-submenu.html">
+    <link rel="import" href="bower_components/core-item/core-item.html">
+    <link rel="import" href="bower_components/core-pages/core-pages.html">
+  </head>
+
+  <body unresolved fullbleed>
+    <template is="auto-binding" id="page-template">
+      <core-scaffold theme="core-light-theme">
+        <core-header-panel navigation flex mode="seamed" theme="core-light-theme">
+          <core-toolbar theme="core-dark-theme"></core-toolbar>
+          <core-menu theme="core-light-theme" on-core-select="{{handleSelect}}">
+            <template repeat="{{item in items}}">
+              <core-submenu icon="visibility" label="{{item.year}}">
+                <template repeat="{{office in item.offices}}">
+                  <core-item id="{{ office + '-' + item.year | replaceSpaces }}" label="{{office}}">
+                    <a href=""></a>
+                  </core-item>
+                </template>
+              </core-submenu>
+            </template>
+          </core-menu>
+        </core-header-panel>
+        <div tool>{{title}}</div>
+        <core-pages selected="{{selectedPageId}}" valueattr="id">
+          <template repeat="{{item in items}}">
+            <template repeat="{{office in item.offices}}">
+              <div id="page-{{ office + '-' + item.year | replaceSpaces }}">{{item.year}} {{office}}</div>
+            </template>
+          </template>
+        </core-pages>
+      </core-scaffold>
+    </template>
+  
+    <script>
+    	var template = document.querySelector('#page-template');
+      template.title = 'DC Campaign Finance Watch';
+
+      template.replaceSpaces = function(str) {
+      	return str.replace(/\s/g, '-');
+    	},
+        
+      template.handleSelect = function(e) {
+        if(e.detail.isSelected && e.detail.item.localName == 'core-item') {
+          this.selectedPageId = 'page-' + e.detail.item.id;
+        }
+      },
+        
+      template.items = [
+        {
+          "offices": [
+              "Mayor",
+              "Council Chairman",
+              "Council At-Large",
+              "Council Ward 1",
+              "Council Ward 3",
+              "Council Ward 5",
+              "Council Ward 6",
+              "Attorney General",
+              "School Board Ward 1",
+              "School Board Ward 3",
+              "School Board Ward 5",
+              "School Board Ward 6",
+              "School Board Ward 8",
+              "US Representative",
+              "US Senator",
+              "Alternate Democratic National Committeeman",
+              "Alternate Democratic National Committeewoman",
+              "At-Large DC Democratic State Committee",
+              "Democratic National Committeeman",
+              "Democratic National Committeewoman",
+              "Ward 3 DC Democratic State Committee",
+              "Ward 6 DC Democratic State Committee",
+              "Ward 1 DC Democratic State Committee"
+          ],
+          "year": "2014"
+        },
+        {
+          "offices": [
+              "Council At-Large"
+          ],
+          "year": "2013"
+        },
+        {
+          "offices": [
+              "Council Chairman",
+              "Council At-Large",
+              "Council Ward 2",
+              "Council Ward 4",
+              "Council Ward 5",
+              "Council Ward 7",
+              "Council Ward 8",
+              "School Board At-Large",
+              "School Board Ward 2",
+              "School Board Ward 7",
+              "School Board Ward 8",
+              "US Senator",
+              "Democratic Delegates",
+              "Republican National Committeewoman",
+              "Republican National Committeeman"
+          ],
+          "year": "2012"
+        },
+        {
+          "offices": [
+              "Council At-Large",
+              "School Board Ward 4",
+              "School Board Ward 8"
+          ],
+          "year": "2011"
+        },
+        {
+          "offices": [
+              "Mayor",
+              "Council Chairman",
+              "Council At-Large",
+              "Council Ward 1",
+              "Council Ward 3",
+              "Council Ward 5",
+              "Council Ward 6",
+              "School Board Ward 1",
+              "School Board Ward 3",
+              "School Board Ward 5",
+              "School Board Ward 6",
+              "US Representative"
+          ],
+          "year": "2010"
+        }
+      ];
+    </script>
+  </body>
+</html>
